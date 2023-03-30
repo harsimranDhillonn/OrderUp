@@ -12,8 +12,22 @@ public class UserServicesTest {
     public void getFirstName() {
         String existingEmail = "admin@email.com";
         String nonexistingEmail = "nothere@email.com";
-        assertEquals("admin@email.com", UserServices.getFirstName(existingEmail));
-        assertEquals(null, UserServices.getFirstName(nonexistingEmail));
+        String result = "";
+
+        try {
+            result = UserServices.getFirstName(existingEmail);
+        } catch(UserException e) {
+            assertEquals("Couldn't find that email.", e.getMessage());
+        }
+
+        assertEquals("admin@email.com", result);
+
+        try {
+            result = UserServices.getFirstName(nonexistingEmail);
+        } catch(UserException e) {
+            assertEquals("Couldn't find that email.", e.getMessage());
+        }
+        assertEquals(null, result);
     }
 
     @Test

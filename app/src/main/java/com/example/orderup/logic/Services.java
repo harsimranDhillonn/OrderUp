@@ -1,12 +1,8 @@
 package com.example.orderup.logic;
 
-import android.util.Log;
-
 import com.example.orderup.persistance.RestaurantPersistence;
 import com.example.orderup.persistance.UserPersistence;
 import com.example.orderup.persistance.hsqldb.RestaurantPersistenceHSQLDB;
-import com.example.orderup.persistance.hsqldb.UserPersistenceHSQLDB;
-import com.example.orderup.persistance.stub.RestaurantPersistenceStub;
 import com.example.orderup.persistance.stub.UserPersistenceStub;
 
 //Class that holds most the static variables.
@@ -22,8 +18,8 @@ public class Services
     {
         if(userPersistence== null)
         {
-//            userPersistence= new UserPersistenceStub();
-            userPersistence = new UserPersistenceHSQLDB(getDBPathName());
+            userPersistence= new UserPersistenceStub();
+            //userPersistence = new UserPersistenceHSQLDB(getDBPathName());
         }
 
         return userPersistence;

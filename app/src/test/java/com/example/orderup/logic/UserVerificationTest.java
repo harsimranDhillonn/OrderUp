@@ -8,15 +8,7 @@ public class UserVerificationTest {
 
     @Test
     public void loginVerificationTest() {
-        /*
-        assertEquals("Email or Password is Empty.", UserVerification.loginVerification("", ""));
-        assertEquals("Incorrect Email Format.", UserVerification.loginVerification("12@3@1@23.com", "2123456"));
-        assertEquals("Incorrect Email Format.", UserVerification.loginVerification("123@123dotcom", "879789"));
-        assertEquals("Email does not exist.", UserVerification.loginVerification("email@not.exist", "correctFormat"));
-        assertEquals("Incorrect Password.", UserVerification.loginVerification("admin@email.com", "wrongPassword"));
-        assertEquals(null, UserVerification.loginVerification("admin@email.com", "admin"));
-         */
-
+    // Database Closed?
         try {
             UserVerification.loginVerification("", "");
         } catch(UserException e) {

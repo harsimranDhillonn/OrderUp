@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.Services;
+import com.example.orderup.logic.UserException;
 import com.example.orderup.logic.UserServices;
 import com.example.orderup.logic.UserVerification;
 
@@ -188,12 +189,15 @@ public class UserAccountFragment extends Fragment
 
     //Display the account info to user.
     private void updateInfo(){
-        display = String.format("First name: %s\n" +
-                "Last name: %s\n" +
-                "Email: %s\n" +
-                "Address: %s\n" +
-                "Account balance: $ %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail), UserServices.getBalance(userEmail));
-
+        try {
+            display = String.format("First name: %s\n" +
+                    "Last name: %s\n" +
+                    "Email: %s\n" +
+                    "Address: %s\n" +
+                    "Account balance: $ %s", UserServices.getFirstName(userEmail), UserServices.getLastName(userEmail), userEmail, UserServices.getAddress(userEmail), UserServices.getBalance(userEmail));
+        } catch(UserException e) {
+            ErrorPopUp.errorMsg(getActivity(), e.getMessage());
+        }
         infoContainer.setText(display);
     }
 }

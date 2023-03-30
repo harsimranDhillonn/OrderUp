@@ -9,16 +9,19 @@ public class UserServices
     private static UserPersistence userPersistence = Services.getUserPersistence();
 
     //Return the first name of the given email.
-    public static String getFirstName(String email)
-    {
+    public static String getFirstName(String email) throws UserException {
+        try {
+
         User user = userPersistence.getUserTable().get(email);
 
-        if(user != null)
-        {
-            return user.getFirstName();
-        }else
-        {
-            return null;
+        if(null == user) {
+            throw new UserException("Couldn't find that email.");
+        }
+
+        return user.getFirstName();
+
+        } catch(UserException e) {
+            throw e;
         }
     }
 
