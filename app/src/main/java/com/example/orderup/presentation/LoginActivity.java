@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderup.R;
 import com.example.orderup.logic.Services;
+import com.example.orderup.logic.UserException;
 import com.example.orderup.logic.UserVerification;
 
 import java.io.File;
@@ -50,24 +51,24 @@ public class LoginActivity extends AppCompatActivity
                 email = emailInput.getText().toString();
                 password = passwordInput.getText().toString();
 
-                //Verify the input data with databases. Go to home page if nothing wrong. Will pop up a window if error occurs.
-                String result = UserVerification.loginVerification(email, password);
-                if(result == null)
+                try
                 {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        //Verify the input data with databases. Go to home page if nothing wrong. Will pop up a window if error occurs.
+                        String result = UserVerification.loginVerification(email, password);
 
-                    //Tell the system who is the current user.
-                    Services.setCurrentUser(email);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
-                    //Start the main activity class.
-                    startActivity(intent);
+                        //Tell the system who is the current user.
+                        Services.setCurrentUser(email);
 
-                    //Remove current activity.
-                    finish();
-                }
-                else //Failed to login.
-                {
-                    ErrorPopUp.errorMsg(LoginActivity.this, result);
+                        //Start the main activity class.
+                        startActivity(intent);
+
+                        //Remove current activity.
+                        finish();
+
+                } catch (UserException e) {
+                    ErrorPopUp.errorMsg(LoginActivity.this, e.getMessage());
                 }
             }
         });

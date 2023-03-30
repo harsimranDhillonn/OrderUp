@@ -14,8 +14,7 @@ public class UserVerification
     private static UserPersistence userPersistence;
 
     //Verify the input email and password from databases. Return null if input data are correct, return error message, otherwise.
-    public static String loginVerification(String email, String password)
-    {
+    public static String loginVerification(String email, String password) throws UserException {
         //Get the database.
         userPersistence = Services.getUserPersistence();
 
@@ -25,12 +24,13 @@ public class UserVerification
         //Input cannot be empty.
         if(email.equals("") || password.equals(""))
         {
-            msg = "Email or Password is Empty.";
+            throw new UserException("Email or Password is Empty.");
+
         }
         //Email format must meet standard format.
         else if(!emailCheck(email))
         {
-            msg = "Incorrect Email Format.";
+            throw new UserException("Incorrect Email Format.");
         }
         //Compare the entered password with the account password.
         else
@@ -48,12 +48,12 @@ public class UserVerification
                 }
                 else
                 {
-                    msg = "Incorrect Password.";
+                    throw new UserException("Incorrect Password.");
                 }
             }
             else
             {
-                msg = "Email does not exist.";
+                throw new UserException("Email does not exist.");
             }
         }
         return msg;
