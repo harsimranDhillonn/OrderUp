@@ -20,37 +20,37 @@ public class UserVerificationTest {
         try {
             UserVerification.loginVerification("", "");
         } catch(UserException e) {
-            assertEquals(null, e.getMessage());
+            assertEquals("Email or Password is Empty.", e.getMessage());
         }
 
         try {
             UserVerification.loginVerification("12@3@1@23.com", "2123456");
         } catch(UserException e) {
-            assertEquals(null, e.getMessage());
+            assertEquals("Incorrect Email Format.", e.getMessage());
         }
 
         try {
             UserVerification.loginVerification("123@123dotcom", "879789");
         } catch(UserException e) {
-            assertEquals(null, e.getMessage());
+            assertEquals("Incorrect Email Format.", e.getMessage());
         }
 
         try {
             UserVerification.loginVerification("email@not.exist", "correctFormat");
         } catch(UserException e) {
-            assertEquals(null, e.getMessage());
+            assertEquals("Email does not exist.", e.getMessage());
         }
 
         try {
             UserVerification.loginVerification("admin@email.com", "wrongPassword");
         } catch(UserException e) {
-            assertEquals(null, e.getMessage());
+            assertEquals("Incorrect Password.", e.getMessage());
         }
 
         try {
             UserVerification.loginVerification("admin@email.com", "admin");
         } catch(UserException e) {
-            assertEquals("", e.getMessage());
+            assertEquals(null, e.getMessage());
         }
 
 
